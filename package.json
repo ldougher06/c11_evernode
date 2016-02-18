@@ -1,0 +1,37 @@
+{
+  "name": "c11_evernode",
+  "version": "1.0.0",
+  "description": "1. CREATE NOTE 2. VIEW INDIVIDUAL NOTE 3. DELETE NOTE 4. LIST NOTES 5. NOTE CATEGORIES 6. SEARCH NOTES 7. EDIT OLD NOTES 8. PICTURE UPLOAD 9. AUTO SAVE 10. SHARE NOTES 11. PW PROTECTION",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ldougher06/c11_evernode.git"
+  },
+  "author": "Logan Dougher <logan.dougher@gmail.com> (https://logandougher.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ldougher06/c11_evernode/issues"
+  },
+  "homepage": "https://github.com/ldougher06/c11_evernode#readme",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "chalk": "^1.1.1",
+    "express": "^4.13.4",
+    "jade": "^1.11.0",
+    "lodash": "^4.2.1",
+    "mongodb": "^2.1.7",
+    "mongoose": "^4.4.3",
+    "multer": "^1.1.0",
+    "request": "^2.69.0"
+  },
+  "devDependencies": {
+    "bower": "^1.7.7",
+    "cheerio": "^0.20.0",
+    "nodemon": "^1.8.1"
+  }
+}
