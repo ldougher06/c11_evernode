@@ -2,6 +2,14 @@
 
 const Note = require('../models/note.model');
 
+module.exports.edit = (req, res) => {
+  res.send('edit');
+}
+
+module.exports.update = (req, res) => {
+  res.send('update');
+}
+
 // serves up the list of notes frmo DB using .find({})
 module.exports.index = (req, res) => {
   Note.find({}, (err, notes) => {
