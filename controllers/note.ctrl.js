@@ -3,12 +3,21 @@
 const Note = require('../models/note.model');
 
 module.exports.edit = (req, res) => {
-  res.send('edit');
+  Note.findById(req.params.id, (err, note) => {
+    if(err) throw err;
+    res.render('new-note', {note: note});
+  });
 }
 
 module.exports.update = (req, res) => {
-  res.send('update');
-}
+  Note.findByIdAndUpdate(req.params.id,
+    req.body, (err, note) => {
+      if (err) throw err;
+
+      res.redirect(`/notes/${note._id}`);
+    }
+  );
+};
 
 // serves up the list of notes frmo DB using .find({})
 module.exports.index = (req, res) => {

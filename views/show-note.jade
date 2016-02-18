@@ -1,5 +1,8 @@
 h1= note.title /* <<< data from note object to be converted to html <<<< */
 p= note.text   /* <<< data from note object to be converted to html <<<< */
 
+form(action='/notes/#{note._id}/edit')
+  input(type='submit', value='Edit')
+
 form(action='/notes/#{note._id}?_method=DELETE', method='POST')
   input(type='submit', value='Delete')
