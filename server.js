@@ -35,7 +35,7 @@ app.post('/notes', (req, res) => {
   Note.create(req.body, (err, note) => { // Note is mongoose.Schema variable
     if(err) throw err;
     console.log(note);
-    res.redirect('/') // shows the note by :id
+    res.redirect(`/notes/${note._id}`); //grabs _id when its created and redirects to show the note
   });
 });
 
@@ -44,7 +44,10 @@ app.post('/notes', (req, res) => {
 // otherwise the browser thinks the param is the :id
 // ex. /notes/new above, new, would be the :id unless its above :id
 app.get('/notes/:id', (req, res) => {
- res.render('show-note');
+  Note.findById(req.params.id, (err, note) => {
+    if(err) throw err;
+    res.render('show-note', {note: note});
+  });
 });
 
 // *** MONGOOSE DATABASE STUFF *** //
