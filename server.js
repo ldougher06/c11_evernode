@@ -1,52 +1,28 @@
 'use strict';
 
 const chalk = require('chalk');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const express = require('express');
-const Note = require('./models/note');
+const mongoose = require('mongoose');
+const methodOverride = require('method-override');
+
+const note = require('./routes/note.route');
 
 const app = express();
-
 const PORT = process.env.PORT || 3000;
 
 app.set('view engine', 'jade');
 
-app.locals.title = 'EVERNODE';
-
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+
+// override with POST having ?_method=DELETE
+app.use(methodOverride('_method'));
 
 app.get('/', (req, res) => {
-  res.send("*** SERVER IS RUNNING ***");
+  res.send('*** Server Running ***');
 });
 
-// serves up the form for new entries. will need "new" and "create" actions
-// review Ruby routes for actions list http://guides.rubyonrails.org/routing.html
-app.get('/notes/new', (req, res) => {
-  res.render('new-note');
-});
-
-// posts note to db using .create() method. Remember to throw err
-app.post('/notes', (req, res) => {
-  Note.create(req.body, (err, note) => { // Note is mongoose.Schema variable
-    if(err) throw err;
-    console.log(note);
-    //grabs _id from note object when its created and redirects to show the note
-    res.redirect(`/notes/${note._id}`);
-  });
-});
-
-// shows the note you created
-// when using route params :id needs to be below other params
-// otherwise the browser thinks the param is the :id
-// ex. /notes/new above, new, would be the :id unless its above :id
-app.get('/notes/:id', (req, res) => {
-  Note.findById(req.params.id, (err, note) => {
-    if(err) throw err;
-    res.render('show-note', {note: note});
-  });
-});
+app.use(note);
 
 // *** MONGOOSE DATABASE STUFF *** //
 const dbURL = 'mongodb://localhost:27017/evernode';
