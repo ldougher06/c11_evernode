@@ -2,6 +2,13 @@
 
 const Note = require('../models/note.model');
 
+// serves up the list of notes frmo DB using .find({})
+module.exports.index = (req, res) => {
+  Note.find({}, (err, notes) => {
+    res.render('index-notes', {notes: notes});
+  });
+}
+
 // serves up the form for new entries. will need "new" and "create" actions
 // review Ruby routes for actions list http://guides.rubyonrails.org/routing.html
 module.exports.newNote = (req, res) => {
@@ -31,11 +38,11 @@ module.exports.create = (req, res) => {
   });
 };
 
-
+// deletes note from DB using mongoose .findByIdAndRemove() method
 module.exports.destroy = (req, res) => {
   Note.findByIdAndRemove(req.params.id, (err) => {
     if(err) throw err;
 
-    res.send('DESTROYED');
+    res.redirect('/notes');
   });
 }
