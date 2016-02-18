@@ -4,10 +4,7 @@ const chalk = require('chalk');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const express = require('express');
-const Note = mongoose.model('Notes', mongoose.Schema({
-  title: String,
-  text: String
-}));
+const Note = require('./models/note');
 
 const app = express();
 
@@ -35,7 +32,8 @@ app.post('/notes', (req, res) => {
   Note.create(req.body, (err, note) => { // Note is mongoose.Schema variable
     if(err) throw err;
     console.log(note);
-    res.redirect(`/notes/${note._id}`); //grabs _id when its created and redirects to show the note
+    //grabs _id from note object when its created and redirects to show the note
+    res.redirect(`/notes/${note._id}`);
   });
 });
 
