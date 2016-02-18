@@ -3,9 +3,9 @@
 const chalk = require('chalk');
 const bodyParser = require('body-parser');
 const express = require('express');
-const mongoose = require('mongoose');
 const methodOverride = require('method-override');
-
+const mongoose = require('mongoose');
+const logger = require('./lib/logger');
 const note = require('./routes/note.route');
 
 const app = express();
@@ -18,9 +18,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // override with POST having ?_method=DELETE
 app.use(methodOverride('_method'));
 
+app.use(logger); // needs to be above '/' route so it can be used on home page
+
 app.get('/', (req, res) => {
   res.send('*** Server Running ***');
 });
+
 
 app.use(note);
 

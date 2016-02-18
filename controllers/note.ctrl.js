@@ -2,6 +2,8 @@
 
 const Note = require('../models/note.model');
 
+// remember to take out => from top of functions and change ; to ,
+
 module.exports = {
   edit (req, res) {
     Note.findById(req.params.id, (err, note) => {
@@ -11,8 +13,7 @@ module.exports = {
   },
 
   update (req, res) {
-    Note.findByIdAndUpdate(req.params.id,
-      req.body, (err, note) => {
+    Note.findByIdAndUpdate(req.params.id, req.body, (err, note) => {
         if (err) throw err;
 
         res.redirect(`/notes/${note._id}`);
