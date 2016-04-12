@@ -13,6 +13,8 @@ const PORT = process.env.PORT || 3000;
 
 app.set('view engine', 'jade');
 
+app.use(express.static('public'));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // override with POST having ?_method=DELETE
@@ -21,7 +23,7 @@ app.use(methodOverride('_method'));
 app.use(logger); // needs to be above '/' route so it can be used on home page
 
 app.get('/', (req, res) => {
-  res.send('*** Server Running ***');
+  res.render('index');
 });
 
 
